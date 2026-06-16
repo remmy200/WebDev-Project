@@ -874,3 +874,56 @@ ul {
     right: 1.25rem;
   }
 }
+/* =========================
+   HOME HERO
+========================= */
+
+.hero-section{
+    height:100vh;
+    min-height:700px;
+
+    background:url('../Images/hotel-hero.jpg') center center/cover no-repeat;
+
+    position:relative;
+    display:flex;
+    align-items:center;
+}
+
+.hero-overlay{
+    position:absolute;
+    inset:0;
+
+    background:rgba(10,15,28,0.55);
+}
+
+.hero-section .container{
+    position:relative;
+    z-index:2;
+}
+
+.hero-title{
+    font-family:var(--font-display);
+    font-size:var(--text-hero);
+    color:white;
+    line-height:1.1;
+    margin-bottom:1rem;
+}
+
+.hero-text{
+    color:rgba(255,255,255,0.9);
+    font-size:1.2rem;
+    max-width:600px;
+    margin-bottom:2rem;
+}
+
+@media(max-width:768px){
+
+    .hero-section{
+        min-height:600px;
+        text-align:center;
+    }
+
+    .hero-text{
+        margin-inline:auto;
+    }
+}
