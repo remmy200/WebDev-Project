@@ -1,29 +1,33 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Rooms</title>
-     <!-- Bootstrap CSS -->
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Rooms &amp; Suites | Château de Remmy</title>
+  <meta name="description" content="Explore the Deluxe Rooms, Junior Suites, Château Suites and Private Villas at Château de Remmy, each combining Riviera views with timeless elegance.">
+
+  <!-- Bootstrap CSS -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
- 
-  <!-- Font Awesome (needed for every fa-solid / fa-brands icon used below) -->
+
+  <!-- Font Awesome -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
- 
-  <!-- Custom Stylesheet (lowercase "css" to match the actual folder name) -->
+
+  <!-- Custom Stylesheet -->
   <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
 
-    <nav class="navbar-chateau navbar-solid">
+  <!-- ══════════════════════════════════════════════════════
+       NAVBAR
+  ══════════════════════════════════════════════════════ -->
+  <nav class="navbar-chateau navbar-solid">
     <a href="index.html" class="navbar-logo">
       Château de Remmy
       <span>Luxury Hotel &amp; Resort</span>
     </a>
- 
+
     <ul class="navbar-links">
-      <li><a href="index.html">Home</a></li>
-      <li><a href="rooms.html">Rooms</a></li>
+      <li><a href="rooms.html" class="active">Rooms</a></li>
       <li><a href="dining.html">Dining</a></li>
       <li><a href="spa.html">Spa</a></li>
       <li><a href="events.html">Events</a></li>
@@ -31,10 +35,416 @@
       <li><a href="gallery.html">Gallery</a></li>
       <li><a href="offers.html">Offers</a></li>
     </ul>
- 
+
     <a href="reservations.html" class="navbar-reserve">Book Now</a>
 
+    <button class="navbar-toggler" id="navToggler" aria-label="Open menu">
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
+  </nav>
 
-    
+  <!-- Mobile Drawer -->
+  <div class="drawer-overlay" id="drawerOverlay"></div>
+  <div class="navbar-drawer" id="navDrawer">
+    <a href="index.html">Home</a>
+    <a href="rooms.html">Rooms</a>
+    <a href="dining.html">Dining</a>
+    <a href="spa.html">Spa</a>
+    <a href="facilities.html">Facilities</a>
+    <a href="events.html">Events</a>
+    <a href="gallery.html">Gallery</a>
+    <a href="offers.html">Offers</a>
+    <a href="reservations.html">Reserve</a>
+    <a href="about.html">About</a>
+    <a href="contact.html">Contact</a>
+  </div>
+
+  <!-- ══════════════════════════════════════════════════════
+       PAGE HERO
+  ══════════════════════════════════════════════════════ -->
+  <header class="page-hero">
+    <img src="images/rooms-hero.jpg" alt="Château de Remmy suite interior with sea view" class="page-hero__bg">
+    <div class="page-hero__overlay"></div>
+    <div class="page-hero__content">
+      <nav class="breadcrumb-chateau" aria-label="breadcrumb">
+        <a href="index.html">Home</a>
+        <span class="sep">/</span>
+        <span>Rooms &amp; Suites</span>
+      </nav>
+      <span class="page-hero__eyebrow">Accommodations</span>
+      <h1 class="page-hero__title">Rooms &amp; Suites</h1>
+    </div>
+  </header>
+
+  <!-- ══════════════════════════════════════════════════════
+       INTRO COPY
+  ══════════════════════════════════════════════════════ -->
+  <section class="section section--white">
+    <div class="container-narrow text-center">
+      <span class="section-eyebrow">Find Your Sanctuary</span>
+      <h2 class="section-title">Four Ways to Stay</h2>
+      <div class="title-divider title-divider--center"></div>
+      <p class="font-serif text-muted">
+        From an intimate garden-facing room to a private villa with its own infinity pool,
+        every category at Château de Remmy is appointed with hand-selected furnishings,
+        Riviera light, and a view worth waking up to.
+      </p>
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════════════════════════════
+       FILTER BAR
+  ══════════════════════════════════════════════════════ -->
+  <section class="section section--cream room-filter">
+    <div class="container">
+      <div class="room-filter__bar">
+        <button class="room-filter__btn active" data-filter="all">All Rooms</button>
+        <button class="room-filter__btn" data-filter="garden">Garden View</button>
+        <button class="room-filter__btn" data-filter="sea">Sea View</button>
+        <button class="room-filter__btn" data-filter="suite">Suites &amp; Villas</button>
+      </div>
+
+      <!-- ══════════════════════════════════════════════════
+           ROOM GRID
+      ══════════════════════════════════════════════════════ -->
+      <div class="row g-4 mt-2" id="roomGrid">
+
+        <!-- Deluxe Room -->
+        <div class="col-md-6 col-lg-3 room-card-wrap" data-category="garden">
+          <div class="card-chateau reveal">
+            <div class="card-chateau__img-wrap">
+              <img src="images/room-deluxe.jpg" alt="Deluxe Room with garden view" class="card-chateau__img">
+              <span class="badge-chateau room-card__badge">Garden View</span>
+            </div>
+            <div class="card-chateau__body">
+              <span class="card-chateau__eyebrow">32m² &middot; Sleeps 2</span>
+              <h3 class="card-chateau__title">Deluxe Room</h3>
+              <p class="card-chateau__text">Quiet comfort overlooking the lavender gardens, with a private reading nook and marble en-suite.</p>
+              <div class="d-flex justify-content-between align-items-center">
+                <div class="card-chateau__price">€290 <span>/ night</span></div>
+                <button class="btn-chateau btn-chateau--dark" data-bs-toggle="modal" data-bs-target="#modalDeluxe">Details</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Junior Suite -->
+        <div class="col-md-6 col-lg-3 room-card-wrap" data-category="sea">
+          <div class="card-chateau reveal">
+            <div class="card-chateau__img-wrap">
+              <img src="images/room-junior-suite.jpg" alt="Junior Suite with sea view" class="card-chateau__img">
+              <span class="badge-chateau room-card__badge">Sea View</span>
+            </div>
+            <div class="card-chateau__body">
+              <span class="card-chateau__eyebrow">48m² &middot; Sleeps 2-3</span>
+              <h3 class="card-chateau__title">Junior Suite</h3>
+              <p class="card-chateau__text">A private balcony facing the Mediterranean, separate sitting area, and deep soaking tub.</p>
+              <div class="d-flex justify-content-between align-items-center">
+                <div class="card-chateau__price">€420 <span>/ night</span></div>
+                <button class="btn-chateau btn-chateau--dark" data-bs-toggle="modal" data-bs-target="#modalJunior">Details</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Château Suite -->
+        <div class="col-md-6 col-lg-3 room-card-wrap" data-category="suite sea">
+          <div class="card-chateau reveal">
+            <div class="card-chateau__img-wrap">
+              <img src="images/room-chateau-suite.jpg" alt="Château Suite with panoramic view" class="card-chateau__img">
+              <span class="badge-chateau room-card__badge">Panoramic View</span>
+            </div>
+            <div class="card-chateau__body">
+              <span class="card-chateau__eyebrow">75m² &middot; Sleeps 4</span>
+              <h3 class="card-chateau__title">Château Suite</h3>
+              <p class="card-chateau__text">Our signature suite: a private terrace, separate living room, and dedicated butler service.</p>
+              <div class="d-flex justify-content-between align-items-center">
+                <div class="card-chateau__price">€680 <span>/ night</span></div>
+                <button class="btn-chateau btn-chateau--dark" data-bs-toggle="modal" data-bs-target="#modalChateau">Details</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Private Villa -->
+        <div class="col-md-6 col-lg-3 room-card-wrap" data-category="suite">
+          <div class="card-chateau reveal">
+            <div class="card-chateau__img-wrap">
+              <img src="images/room-villa.jpg" alt="Private Villa with pool" class="card-chateau__img">
+              <span class="badge-chateau room-card__badge">Private Pool</span>
+            </div>
+            <div class="card-chateau__body">
+              <span class="card-chateau__eyebrow">120m² &middot; Sleeps 6</span>
+              <h3 class="card-chateau__title">Private Villa</h3>
+              <p class="card-chateau__text">A standalone villa with its own infinity pool, outdoor kitchen, and dedicated concierge.</p>
+              <div class="d-flex justify-content-between align-items-center">
+                <div class="card-chateau__price">€1,250 <span>/ night</span></div>
+                <button class="btn-chateau btn-chateau--dark" data-bs-toggle="modal" data-bs-target="#modalVilla">Details</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <p class="text-center text-muted mt-4 d-none" id="noRoomsMsg">No rooms match this filter just yet.</p>
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════════════════════════════
+       AMENITIES STRIP
+  ══════════════════════════════════════════════════════ -->
+  <section class="section section--dark why-us">
+    <div class="container text-center">
+      <span class="section-eyebrow">In Every Room</span>
+      <h2 class="section-title">Standard Amenities</h2>
+      <div class="title-divider title-divider--center"></div>
+    </div>
+    <div class="container">
+      <div class="row g-5 text-center">
+        <div class="col-md-3 reveal">
+          <i class="fa-solid fa-wifi why-us__icon"></i>
+          <h3 class="why-us__title">High-Speed Wi-Fi</h3>
+          <p class="why-us__text">Complimentary fibre internet throughout your stay.</p>
+        </div>
+        <div class="col-md-3 reveal">
+          <i class="fa-solid fa-mug-hot why-us__icon"></i>
+          <h3 class="why-us__title">In-Room Dining</h3>
+          <p class="why-us__text">24-hour menu prepared by our culinary team.</p>
+        </div>
+        <div class="col-md-3 reveal">
+          <i class="fa-solid fa-bath why-us__icon"></i>
+          <h3 class="why-us__title">Marble Bathrooms</h3>
+          <p class="why-us__text">Rainfall showers and Provençal bath amenities.</p>
+        </div>
+        <div class="col-md-3 reveal">
+          <i class="fa-solid fa-shirt why-us__icon"></i>
+          <h3 class="why-us__title">Daily Housekeeping</h3>
+          <p class="why-us__text">Turndown service and same-day laundry available.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════════════════════════════
+       CTA STRIP
+  ══════════════════════════════════════════════════════ -->
+  <section class="section section--white text-center">
+    <h2 class="section-title">Ready to Reserve Your Room?</h2>
+    <p class="font-serif text-muted mb-4">Availability is limited during peak Riviera season.</p>
+    <a href="reservations.html" class="btn-chateau btn-chateau--filled">Check Availability</a>
+  </section>
+
+  <!-- ══════════════════════════════════════════════════════
+       FOOTER
+  ══════════════════════════════════════════════════════ -->
+  <footer class="footer">
+    <div class="footer-grid">
+
+      <div class="footer-brand">
+        <a href="index.html" class="navbar-logo">
+          Château de Remmy
+          <span>Luxury Hotel &amp; Resort</span>
+        </a>
+        <p>A five-star sanctuary on the French Riviera, welcoming guests with timeless
+           elegance since 1898.</p>
+        <div class="footer-socials">
+          <a href="#" class="footer-social-icon" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
+          <a href="#" class="footer-social-icon" aria-label="Facebook"><i class="fa-brands fa-facebook-f"></i></a>
+          <a href="#" class="footer-social-icon" aria-label="Pinterest"><i class="fa-brands fa-pinterest-p"></i></a>
+        </div>
+      </div>
+
+      <div class="footer-explore">
+        <h4 class="footer-heading">Explore</h4>
+        <div class="footer-links">
+          <a href="rooms.html">Rooms &amp; Suites</a>
+          <a href="dining.html">Dining</a>
+          <a href="spa.html">Spa &amp; Wellness</a>
+          <a href="facilities.html">Facilities</a>
+          <a href="events.html">Events &amp; Conferences</a>
+          <a href="gallery.html">Gallery</a>
+          <a href="offers.html">Special Offers</a>
+        </div>
+      </div>
+
+      <div class="footer-info">
+        <h4 class="footer-heading">Information</h4>
+        <div class="footer-links">
+          <a href="about.html">About Us</a>
+          <a href="reservations.html">Reservations</a>
+          <a href="faq.html">FAQs</a>
+          <a href="contact.html">Contact</a>
+        </div>
+      </div>
+
+      <div class="footer-contact">
+        <h4 class="footer-heading">Contact</h4>
+        <div class="footer-contact-item">
+          <i class="fa-solid fa-location-dot"></i>
+          <span>14 Promenade des Anglais, Nice, France</span>
+        </div>
+        <div class="footer-contact-item">
+          <i class="fa-solid fa-phone"></i>
+          <span>+254 742 604 844 (Owner, based in Kenya)</span>
+        </div>
+        <div class="footer-contact-item">
+          <i class="fa-solid fa-phone"></i>
+          <span>+33 4 93 16 20 00 (Reservations)</span>
+        </div>
+        <div class="footer-contact-item">
+          <i class="fa-solid fa-envelope"></i>
+          <span>reservations@chateauderemmy.com</span>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="footer-bottom">
+      <span>&copy; 2026 Château de Remmy. All rights reserved.</span>
+      <span><a href="#">Privacy Policy</a> &middot; <a href="#">Terms of Service</a></span>
+    </div>
+  </footer>
+
+  <!-- Back to Top -->
+  <button id="back-to-top" aria-label="Back to top">
+    <i class="fa-solid fa-arrow-up"></i>
+  </button>
+
+  <!-- ══════════════════════════════════════════════════════
+       ROOM DETAIL MODALS
+  ══════════════════════════════════════════════════════ -->
+
+  <!-- Deluxe Room Modal -->
+  <div class="modal fade" id="modalDeluxe" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg">
+      <div class="modal-content room-modal">
+        <div class="modal-header">
+          <h3 class="modal-title font-display">Deluxe Room</h3>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <img src="images/room-deluxe.jpg" alt="Deluxe Room with garden view" class="room-modal__img mb-3">
+          <p class="text-muted">
+            Our entry-level category does not compromise on comfort. Each Deluxe Room faces the lavender
+            gardens and is finished with reclaimed oak flooring, a king bed dressed in Egyptian cotton,
+            and a private en-suite bathroom in Carrara marble.
+          </p>
+          <ul class="room-modal__list">
+            <li><i class="fa-solid fa-check"></i> 32m² floor area</li>
+            <li><i class="fa-solid fa-check"></i> Garden view with French balcony</li>
+            <li><i class="fa-solid fa-check"></i> King bed or twin configuration</li>
+            <li><i class="fa-solid fa-check"></i> Rainfall shower</li>
+            <li><i class="fa-solid fa-check"></i> Complimentary minibar on arrival</li>
+          </ul>
+        </div>
+        <div class="modal-footer">
+          <div class="card-chateau__price">€290 <span>/ night</span></div>
+          <a href="reservations.html" class="btn-chateau btn-chateau--filled">Reserve This Room</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Junior Suite Modal -->
+  <div class="modal fade" id="modalJunior" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg">
+      <div class="modal-content room-modal">
+        <div class="modal-header">
+          <h3 class="modal-title font-display">Junior Suite</h3>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <img src="images/room-junior-suite.jpg" alt="Junior Suite with sea view" class="room-modal__img mb-3">
+          <p class="text-muted">
+            Wake to the sound of the Mediterranean. The Junior Suite adds a separate sitting area and a
+            private balcony with uninterrupted sea views, ideal for couples seeking a touch more space.
+          </p>
+          <ul class="room-modal__list">
+            <li><i class="fa-solid fa-check"></i> 48m² floor area</li>
+            <li><i class="fa-solid fa-check"></i> Private balcony, full sea view</li>
+            <li><i class="fa-solid fa-check"></i> Separate sitting area</li>
+            <li><i class="fa-solid fa-check"></i> Deep soaking tub and rainfall shower</li>
+            <li><i class="fa-solid fa-check"></i> Nespresso machine and curated minibar</li>
+          </ul>
+        </div>
+        <div class="modal-footer">
+          <div class="card-chateau__price">€420 <span>/ night</span></div>
+          <a href="reservations.html" class="btn-chateau btn-chateau--filled">Reserve This Room</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Château Suite Modal -->
+  <div class="modal fade" id="modalChateau" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg">
+      <div class="modal-content room-modal">
+        <div class="modal-header">
+          <h3 class="modal-title font-display">Château Suite</h3>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <img src="images/room-chateau-suite.jpg" alt="Château Suite with panoramic view" class="room-modal__img mb-3">
+          <p class="text-muted">
+            Our signature accommodation. The Château Suite occupies a corner position with panoramic
+            views across both the gardens and the sea, paired with a private terrace and a dedicated
+            butler available throughout your stay.
+          </p>
+          <ul class="room-modal__list">
+            <li><i class="fa-solid fa-check"></i> 75m² floor area</li>
+            <li><i class="fa-solid fa-check"></i> Panoramic corner views</li>
+            <li><i class="fa-solid fa-check"></i> Private terrace and separate living room</li>
+            <li><i class="fa-solid fa-check"></i> Dedicated butler service</li>
+            <li><i class="fa-solid fa-check"></i> Complimentary champagne on arrival</li>
+          </ul>
+        </div>
+        <div class="modal-footer">
+          <div class="card-chateau__price">€680 <span>/ night</span></div>
+          <a href="reservations.html" class="btn-chateau btn-chateau--filled">Reserve This Room</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Private Villa Modal -->
+  <div class="modal fade" id="modalVilla" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg">
+      <div class="modal-content room-modal">
+        <div class="modal-header">
+          <h3 class="modal-title font-display">Private Villa</h3>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <img src="images/room-villa.jpg" alt="Private Villa with pool" class="room-modal__img mb-3">
+          <p class="text-muted">
+            For guests seeking complete privacy, our standalone Villa sits apart from the main château,
+            surrounded by its own gardens with a private infinity pool and outdoor kitchen — a full
+            residence rather than a room.
+          </p>
+          <ul class="room-modal__list">
+            <li><i class="fa-solid fa-check"></i> 120m² floor area across two levels</li>
+            <li><i class="fa-solid fa-check"></i> Private infinity pool and sun terrace</li>
+            <li><i class="fa-solid fa-check"></i> Outdoor kitchen and dining pavilion</li>
+            <li><i class="fa-solid fa-check"></i> Three bedrooms, sleeps up to 6</li>
+            <li><i class="fa-solid fa-check"></i> Dedicated villa host and private chef on request</li>
+          </ul>
+        </div>
+        <div class="modal-footer">
+          <div class="card-chateau__price">€1,250 <span>/ night</span></div>
+          <a href="reservations.html" class="btn-chateau btn-chateau--filled">Reserve This Villa</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Bootstrap JS Bundle (includes Popper) -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+  <!-- Custom JS -->
+  <script src="js/main.js"></script>
+
 </body>
 </html>
