@@ -57,6 +57,235 @@
     <a href="contact.html">Contact</a>
   </div>
 
+  <!-- ══════════════════════════════════════════════════════
+       PAGE HERO
+  ══════════════════════════════════════════════════════ -->
+  <header class="page-hero">
+    <img src="images/dining-hero.jpg" alt="Candlelit dining terrace overlooking the sea at Château de Remmy" class="page-hero__bg">
+    <div class="page-hero__overlay"></div>
+    <div class="page-hero__content">
+      <nav class="breadcrumb-chateau" aria-label="breadcrumb">
+        <a href="index.html">Home</a>
+        <span class="sep">/</span>
+        <span>Dining</span>
+      </nav>
+      <span class="page-hero__eyebrow">Culinary Experiences</span>
+      <h1 class="page-hero__title">Dining at the Château</h1>
+    </div>
+  </header>
+  <!-- ══════════════════════════════════════════════════════
+       INTRO COPY
+  ══════════════════════════════════════════════════════ -->
+  <section class="section section--white">
+    <div class="container-narrow text-center">
+      <span class="section-eyebrow">A Table With a View</span>
+      <h2 class="section-title">Two Restaurants, One Philosophy</h2>
+      <div class="title-divider title-divider--center"></div>
+      <p class="font-serif text-muted">
+        Every dish served at Château de Remmy begins with what the Riviera offers that morning —
+        the catch from Nice's harbor, herbs from our own garden, and produce from growers we have
+        worked with for decades. Two distinct restaurants share this same conviction, each with
+        its own rhythm and setting.
+      </p>
+    </div>
+  </section>
+
+
+  <!-- ══════════════════════════════════════════════════════
+       RESTAURANT SHOWCASE
+  ══════════════════════════════════════════════════════ -->
+  <section class="section section--cream">
+    <div class="container">
+      <div class="row g-5 align-items-center mb-5">
+        <div class="col-lg-6 reveal">
+          <img src="images/dining-lazure.jpg" alt="L'Azure restaurant interior at Château de Remmy" class="dining-feature__img">
+        </div>
+        <div class="col-lg-6 reveal">
+          <span class="badge-chateau">Signature Restaurant</span>
+          <h3 class="dining-feature__title font-display mt-3">L'Azure</h3>
+          <p class="font-serif text-muted dining-feature__lead">
+            Modern French cuisine with Mediterranean influence, served on a terrace suspended above the sea.
+          </p>
+          <p class="text-muted">
+            Open for dinner only, L'Azure seats just 40 guests a night across an intimate dining room
+            and an open-air terrace. Tasting menus change weekly depending on what the markets and our
+            own gardens provide, with a wine list curated from small Provençal and Burgundian producers.
+          </p>
+          <ul class="dining-feature__meta">
+            <li><i class="fa-solid fa-clock"></i> Dinner, 7:00 PM – 11:00 PM</li>
+            <li><i class="fa-solid fa-shirt"></i> Smart elegant dress code</li>
+            <li><i class="fa-solid fa-utensils"></i> Tasting menu &amp; à la carte</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="row g-5 align-items-center flex-lg-row-reverse">
+        <div class="col-lg-6 reveal">
+          <img src="images/dining-jardin.jpg" alt="Le Jardin restaurant courtyard seating at Château de Remmy" class="dining-feature__img">
+        </div>
+        <div class="col-lg-6 reveal">
+          <span class="badge-chateau badge-chateau--outline">All-Day Dining</span>
+          <h3 class="dining-feature__title font-display mt-3">Le Jardin</h3>
+          <p class="font-serif text-muted dining-feature__lead">
+            A relaxed courtyard restaurant for breakfast, lunch, and casual evenings under the olive trees.
+          </p>
+          <p class="text-muted">
+            Le Jardin is where the Château gathers throughout the day — fresh pastries and Riviera
+            breakfasts each morning, light Mediterranean plates at lunch, and shared boards for evenings
+            spent lingering at the table. Children and families are always welcome here.
+          </p>
+          <ul class="dining-feature__meta">
+            <li><i class="fa-solid fa-clock"></i> 7:00 AM – 10:00 PM, daily</li>
+            <li><i class="fa-solid fa-shirt"></i> Casual, resort attire</li>
+            <li><i class="fa-solid fa-utensils"></i> Breakfast, lunch &amp; light dinner</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ══════════════════════════════════════════════════════
+       MENU TABS
+  ══════════════════════════════════════════════════════ -->
+  <section class="section section--white">
+    <div class="container text-center mb-4">
+      <span class="section-eyebrow">Sample Menu</span>
+      <h2 class="section-title">What's on the Table</h2>
+      <div class="title-divider title-divider--center"></div>
+    </div>
+
+    <div class="container">
+      <ul class="nav menu-tabs justify-content-center" id="menuTab" role="tablist">
+        <li class="nav-item" role="presentation">
+          <button class="nav-link active" id="tab-starters-btn" data-bs-toggle="tab" data-bs-target="#tab-starters" type="button" role="tab" aria-controls="tab-starters" aria-selected="true">Starters</button>
+        </li>
+        <li class="nav-item" role="presentation">
+          <button class="nav-link" id="tab-mains-btn" data-bs-toggle="tab" data-bs-target="#tab-mains" type="button" role="tab" aria-controls="tab-mains" aria-selected="false">Mains</button>
+        </li>
+        <li class="nav-item" role="presentation">
+          <button class="nav-link" id="tab-desserts-btn" data-bs-toggle="tab" data-bs-target="#tab-desserts" type="button" role="tab" aria-controls="tab-desserts" aria-selected="false">Desserts</button>
+        </li>
+        <li class="nav-item" role="presentation">
+          <button class="nav-link" id="tab-wine-btn" data-bs-toggle="tab" data-bs-target="#tab-wine" type="button" role="tab" aria-controls="tab-wine" aria-selected="false">Wine Pairings</button>
+        </li>
+      </ul>
+
+      <div class="tab-content menu-tabs__content" id="menuTabContent">
+
+        <div class="tab-pane fade show active" id="tab-starters" role="tabpanel" aria-labelledby="tab-starters-btn">
+          <div class="menu-item">
+            <div class="menu-item__row">
+              <span class="menu-item__name">Heirloom Tomato &amp; Burrata</span>
+              <span class="menu-item__price">€22</span>
+            </div>
+            <p class="menu-item__desc">Basil oil, aged balsamic, garden microgreens.</p>
+          </div>
+          <div class="menu-item">
+            <div class="menu-item__row">
+              <span class="menu-item__name">Niçoise Tuna Tartare</span>
+              <span class="menu-item__price">€28</span>
+            </div>
+            <p class="menu-item__desc">Quail egg, capers, olive crumble, citrus dressing.</p>
+          </div>
+          <div class="menu-item">
+            <div class="menu-item__row">
+              <span class="menu-item__name">Chilled Pea &amp; Mint Velouté</span>
+              <span class="menu-item__price">€19</span>
+            </div>
+            <p class="menu-item__desc">Goat cheese tuile, lemon oil.</p>
+          </div>
+        </div>
+
+        <div class="tab-pane fade" id="tab-mains" role="tabpanel" aria-labelledby="tab-mains-btn">
+          <div class="menu-item">
+            <div class="menu-item__row">
+              <span class="menu-item__name">Pan-Seared Sea Bass</span>
+              <span class="menu-item__price">€48</span>
+            </div>
+            <p class="menu-item__desc">Fennel purée, saffron broth, charred lemon.</p>
+          </div>
+          <div class="menu-item">
+            <div class="menu-item__row">
+              <span class="menu-item__name">Provençal Lamb Rack</span>
+              <span class="menu-item__price">€56</span>
+            </div>
+            <p class="menu-item__desc">Herb crust, ratatouille, rosemary jus.</p>
+          </div>
+          <div class="menu-item">
+            <div class="menu-item__row">
+              <span class="menu-item__name">Truffle Risotto</span>
+              <span class="menu-item__price">€42</span>
+            </div>
+            <p class="menu-item__desc">Aged parmesan, black truffle, garden chives.</p>
+          </div>
+        </div>
+
+        <div class="tab-pane fade" id="tab-desserts" role="tabpanel" aria-labelledby="tab-desserts-btn">
+          <div class="menu-item">
+            <div class="menu-item__row">
+              <span class="menu-item__name">Lavender Crème Brûlée</span>
+              <span class="menu-item__price">€16</span>
+            </div>
+            <p class="menu-item__desc">Riviera lavender, candied orange.</p>
+          </div>
+          <div class="menu-item">
+            <div class="menu-item__row">
+              <span class="menu-item__name">Dark Chocolate Soufflé</span>
+              <span class="menu-item__price">€18</span>
+            </div>
+            <p class="menu-item__desc">Valrhona chocolate, vanilla anglaise.</p>
+          </div>
+        </div>
+
+        <div class="tab-pane fade" id="tab-wine" role="tabpanel" aria-labelledby="tab-wine-btn">
+          <div class="menu-item">
+            <div class="menu-item__row">
+              <span class="menu-item__name">Bandol Rosé, Domaine Tempier</span>
+              <span class="menu-item__price">€68</span>
+            </div>
+            <p class="menu-item__desc">Recommended with the Niçoise Tuna Tartare.</p>
+          </div>
+          <div class="menu-item">
+            <div class="menu-item__row">
+              <span class="menu-item__name">Châteauneuf-du-Pape, Domaine de Beaurenard</span>
+              <span class="menu-item__price">€94</span>
+            </div>
+            <p class="menu-item__desc">Recommended with the Provençal Lamb Rack.</p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════════════════════════════
+       CHEF PROFILE
+  ══════════════════════════════════════════════════════ -->
+  <section class="section section--dark">
+    <div class="container">
+      <div class="row align-items-center g-5">
+        <div class="col-lg-4 text-center reveal">
+          <img src="images/chef-portrait.jpg" alt="Executive Chef Antoine Lefèvre" class="chef-portrait">
+        </div>
+        <div class="col-lg-8 reveal">
+          <span class="section-eyebrow">Executive Chef</span>
+          <h2 class="section-title">Antoine Lefèvre</h2>
+          <div class="title-divider"></div>
+          <p class="font-serif intro__lead">
+            "Cooking on the Riviera means listening to the season before deciding on the menu."
+          </p>
+          <p class="why-us__text">
+            Chef Antoine trained under two Michelin-starred kitchens in Lyon and Marseille before joining
+            Château de Remmy in 2015. His approach favors restraint over spectacle, letting the quality
+            of local ingredients lead every plate that leaves the kitchen. Under his direction, L'Azure
+            has been recognized in regional culinary guides for four consecutive years.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
 
     
 </body>
