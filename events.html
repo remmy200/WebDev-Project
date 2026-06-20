@@ -202,15 +202,84 @@
     </div>
   </section>
 
+  <!-- INQUIRY FORM -->
+  <section class="section section--dark">
+    <div class="container">
+      <div class="row g-5">
+        <div class="col-lg-5">
+          <span class="section-eyebrow">Get In Touch</span>
+          <h2 class="section-title">Request an Event Proposal</h2>
+          <div class="title-divider"></div>
+          <p class="why-us__text mb-4">
+            Share a few details about your event and our events team will respond within
+            one business day with availability and a tailored proposal.
+          </p>
+          <div class="footer-contact-item">
+            <i class="fa-solid fa-envelope"></i>
+            <span>events@chateauderemmy.com</span>
+          </div>
+          <div class="footer-contact-item">
+            <i class="fa-solid fa-phone"></i>
+            <span>+33 4 93 16 20 10</span>
+          </div>
+        </div>
 
-
-
-
-
-
-
-
-
+        <div class="col-lg-7">
+          <form class="form-chateau event-form" id="eventInquiryForm" novalidate>
+            <div class="row g-3">
+              <div class="col-md-6">
+                <label class="form-label" for="eventName">Full Name</label>
+                <input type="text" class="form-control" id="eventName" required>
+              </div>
+              <div class="col-md-6">
+                <label class="form-label" for="eventEmail">Email Address</label>
+                <input type="email" class="form-control" id="eventEmail" required>
+              </div>
+              <div class="col-md-6">
+                <label class="form-label" for="eventType">Event Type</label>
+                <select class="form-select" id="eventType" required>
+                  <option value="" selected disabled>Select an event type</option>
+                  <option>Wedding</option>
+                  <option>Corporate Retreat</option>
+                  <option>Private Celebration</option>
+                  <option>Conference</option>
+                  <option>Other</option>
+                </select>
+              </div>
+              <div class="col-md-6">
+                <label class="form-label" for="eventGuests">Estimated Guests</label>
+                <input type="number" class="form-control" id="eventGuests" min="1" required>
+              </div>
+              <div class="col-md-6">
+                <label class="form-label" for="eventDate">Preferred Date</label>
+                <input type="date" class="form-control" id="eventDate" required>
+              </div>
+              <div class="col-md-6">
+                <label class="form-label" for="eventVenue">Preferred Venue</label>
+                <select class="form-select" id="eventVenue">
+                  <option value="" selected>No preference</option>
+                  <option>The Grand Ballroom</option>
+                  <option>The Rose Garden</option>
+                  <option>The Sea Terrace</option>
+                  <option>The Library Boardroom</option>
+                </select>
+              </div>
+              <div class="col-12">
+                <label class="form-label" for="eventMessage">Tell Us About Your Event</label>
+                <textarea class="form-control" id="eventMessage" rows="4"></textarea>
+              </div>
+              <div class="col-12">
+                <button type="submit" class="btn-chateau btn-chateau--filled">Submit Inquiry</button>
+                <span class="event-form__success d-none" id="eventFormSuccess">
+                  <i class="fa-solid fa-check-circle"></i> Thank you — we'll be in touch shortly.
+                </span>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
 
 
      <!-- Footer -->
