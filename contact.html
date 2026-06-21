@@ -72,6 +72,117 @@
     </div>
   </header>
 
+  <!-- CONTACT INFO + FORM -->
+  <section class="section section--white">
+    <div class="container">
+      <div class="row g-5">
+
+        <!-- CONTACT INFO -->
+        <div class="col-lg-4">
+          <span class="section-eyebrow">Get In Touch</span>
+          <h2 class="section-title">Visit or Reach Us</h2>
+          <div class="title-divider"></div>
+
+          <div class="contact-info-block">
+            <i class="fa-solid fa-location-dot contact-info-block__icon"></i>
+            <div>
+              <h4>Address</h4>
+              <p class="text-muted">14 Promenade des Anglais<br>06000 Nice, France</p>
+            </div>
+          </div>
+
+          <div class="contact-info-block">
+            <i class="fa-solid fa-phone contact-info-block__icon"></i>
+            <div>
+              <h4>Reservations</h4>
+              <p class="text-muted">+33 4 93 16 20 00</p>
+            </div>
+          </div>
+
+          <div class="contact-info-block">
+            <i class="fa-solid fa-phone contact-info-block__icon"></i>
+            <div>
+              <h4>Owner / Head Office</h4>
+              <p class="text-muted">+254 742 604 844 (based in Kenya)</p>
+            </div>
+          </div>
+
+          <div class="contact-info-block">
+            <i class="fa-solid fa-envelope contact-info-block__icon"></i>
+            <div>
+              <h4>Email</h4>
+              <p class="text-muted">reservations@chateauderemmy.com</p>
+            </div>
+          </div>
+
+          <div class="contact-info-block">
+            <i class="fa-solid fa-clock contact-info-block__icon"></i>
+            <div>
+              <h4>Front Desk Hours</h4>
+              <p class="text-muted">Open 24 hours, every day</p>
+            </div>
+          </div>
+
+          <div class="footer-socials mt-4">
+            <a href="#" class="footer-social-icon footer-social-icon--dark" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
+            <a href="#" class="footer-social-icon footer-social-icon--dark" aria-label="Facebook"><i class="fa-brands fa-facebook-f"></i></a>
+            <a href="#" class="footer-social-icon footer-social-icon--dark" aria-label="Pinterest"><i class="fa-brands fa-pinterest-p"></i></a>
+          </div>
+        </div>
+
+        <!-- CONTACT FORM -->
+        <div class="col-lg-8">
+          <div class="contact-form-card">
+            <h3 class="font-display mb-1">Send Us a Message</h3>
+            <p class="text-muted mb-4">For reservations, please use our <a href="reservations.html" class="text-gold">booking page</a> instead — this form is for general inquiries.</p>
+
+            <form class="form-chateau" id="contactForm" novalidate>
+              <div class="row g-3">
+                <div class="col-md-6">
+                  <label class="form-label" for="contactName">Full Name</label>
+                  <input type="text" class="form-control" id="contactName" required>
+                </div>
+                <div class="col-md-6">
+                  <label class="form-label" for="contactEmail">Email Address</label>
+                  <input type="email" class="form-control" id="contactEmail" required>
+                  <span class="form-error" id="contactEmailError"></span>
+                </div>
+                <div class="col-md-6">
+                  <label class="form-label" for="contactPhone">Phone Number</label>
+                  <input type="tel" class="form-control" id="contactPhone" placeholder="+254 7XX XXX XXX">
+                  <span class="form-error" id="contactPhoneError"></span>
+                </div>
+                <div class="col-md-6">
+                  <label class="form-label" for="contactSubject">Subject</label>
+                  <select class="form-select" id="contactSubject" required>
+                    <option value="" selected disabled>Select a subject</option>
+                    <option>General Inquiry</option>
+                    <option>Feedback</option>
+                    <option>Press &amp; Media</option>
+                    <option>Careers</option>
+                    <option>Other</option>
+                  </select>
+                </div>
+                <div class="col-12">
+                  <label class="form-label" for="contactMessage">Message</label>
+                  <textarea class="form-control" id="contactMessage" rows="5" required></textarea>
+                </div>
+                <div class="col-12">
+                  <button type="submit" class="btn-chateau btn-chateau--filled">Send Message</button>
+                  <span class="event-form__success d-none" id="contactFormSuccess">
+                    <i class="fa-solid fa-check-circle"></i> Message sent — we'll reply within one business day.
+                  </span>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+
 
 
     
