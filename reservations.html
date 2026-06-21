@@ -137,6 +137,101 @@
                 <button type="button" class="btn-chateau btn-chateau--filled booking-next" data-next="2">Continue to Room Selection</button>
               </div>
             </div>
+          
+            <!-- STEP 2: Choose Room -->
+            <div class="booking-panel" id="panel-2">
+              <h3 class="font-display panel-title">Select Your Room</h3>
+              <div class="room-select-list">
+
+                <label class="room-select-card">
+                  <input type="radio" name="roomChoice" value="deluxe" data-price="290">
+                  <div class="room-select-card__body">
+                    <img src="images/room-deluxe.jpg" alt="Deluxe Room">
+                    <div>
+                      <h4>Deluxe Room</h4>
+                      <span class="text-muted">Garden view &middot; 32m² &middot; Sleeps 2</span>
+                    </div>
+                    <div class="room-select-card__price">€290<span>/night</span></div>
+                  </div>
+                </label>
+
+                <label class="room-select-card">
+                  <input type="radio" name="roomChoice" value="junior" data-price="420">
+                  <div class="room-select-card__body">
+                    <img src="images/room-junior-suite.jpg" alt="Junior Suite">
+                    <div>
+                      <h4>Junior Suite</h4>
+                      <span class="text-muted">Sea view &middot; 48m² &middot; Sleeps 2-3</span>
+                    </div>
+                    <div class="room-select-card__price">€420<span>/night</span></div>
+                  </div>
+                </label>
+
+                <label class="room-select-card">
+                  <input type="radio" name="roomChoice" value="chateau" data-price="680">
+                  <div class="room-select-card__body">
+                    <img src="images/room-chateau-suite.jpg" alt="Château Suite">
+                    <div>
+                      <h4>Château Suite</h4>
+                      <span class="text-muted">Panoramic view &middot; 75m² &middot; Sleeps 4</span>
+                    </div>
+                    <div class="room-select-card__price">€680<span>/night</span></div>
+                  </div>
+                </label>
+
+                <label class="room-select-card">
+                  <input type="radio" name="roomChoice" value="villa" data-price="1250">
+                  <div class="room-select-card__body">
+                    <img src="images/room-villa.jpg" alt="Private Villa">
+                    <div>
+                      <h4>Private Villa</h4>
+                      <span class="text-muted">Private pool &middot; 120m² &middot; Sleeps 6</span>
+                    </div>
+                    <div class="room-select-card__price">€1,250<span>/night</span></div>
+                  </div>
+                </label>
+
+              </div>
+              <div class="booking-panel__actions">
+                <button type="button" class="btn-chateau btn-chateau--dark booking-back" data-back="1">Back</button>
+                <button type="button" class="btn-chateau btn-chateau--filled booking-next" data-next="3">Continue to Your Details</button>
+              </div>
+            </div>
+
+            <!-- STEP 3: Your Details -->
+            <div class="booking-panel" id="panel-3">
+              <h3 class="font-display panel-title">Your Details</h3>
+              <div class="row g-3">
+                <div class="col-md-6">
+                  <label class="form-label" for="resFirstName">First Name</label>
+                  <input type="text" class="form-control" id="resFirstName" required>
+                </div>
+                <div class="col-md-6">
+                  <label class="form-label" for="resLastName">Last Name</label>
+                  <input type="text" class="form-control" id="resLastName" required>
+                </div>
+                <div class="col-md-6">
+                  <label class="form-label" for="resEmail">Email Address</label>
+                  <input type="email" class="form-control" id="resEmail" required>
+                </div>
+                <div class="col-md-6">
+                  <label class="form-label" for="resPhone">Phone Number</label>
+                  <input type="tel" class="form-control" id="resPhone" required>
+                </div>
+                <div class="col-12">
+                  <label class="form-label" for="resRequests">Special Requests</label>
+                  <textarea class="form-control" id="resRequests" rows="3" placeholder="Late check-in, dietary requirements, celebration occasions..."></textarea>
+                </div>
+              </div>
+              <div class="booking-panel__actions">
+                <button type="button" class="btn-chateau btn-chateau--dark booking-back" data-back="2">Back</button>
+                <button type="button" class="btn-chateau btn-chateau--filled booking-next" data-next="4">Review Booking</button>
+              </div>
+            </div>
+
+
+
+  
 
 
 
