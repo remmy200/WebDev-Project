@@ -72,6 +72,73 @@
     </div>
   </header>
 
+   <!-- BOOKING FORM — STEPPER -->
+  <section class="section section--white">
+    <div class="container">
+
+      <!-- Step Indicator -->
+      <div class="booking-steps" id="bookingSteps">
+        <div class="booking-step active" data-step="1">
+          <span class="booking-step__num">1</span>
+          <span class="booking-step__label">Dates &amp; Guests</span>
+        </div>
+        <div class="booking-step" data-step="2">
+          <span class="booking-step__num">2</span>
+          <span class="booking-step__label">Choose Room</span>
+        </div>
+        <div class="booking-step" data-step="3">
+          <span class="booking-step__num">3</span>
+          <span class="booking-step__label">Your Details</span>
+        </div>
+        <div class="booking-step" data-step="4">
+          <span class="booking-step__num">4</span>
+          <span class="booking-step__label">Confirm</span>
+        </div>
+      </div>
+
+      <div class="row g-5">
+
+        <!-- FORM COLUMN -->
+        <div class="col-lg-8">
+          <form class="form-chateau" id="reservationForm" novalidate>
+
+            <!-- STEP 1: Dates & Guests -->
+            <div class="booking-panel active" id="panel-1">
+              <h3 class="font-display panel-title">When Are You Staying?</h3>
+              <div class="row g-3">
+                <div class="col-md-6">
+                  <label class="form-label" for="resCheckin">Check-In Date</label>
+                  <input type="date" class="form-control" id="resCheckin" required>
+                </div>
+                <div class="col-md-6">
+                  <label class="form-label" for="resCheckout">Check-Out Date</label>
+                  <input type="date" class="form-control" id="resCheckout" required>
+                </div>
+                <div class="col-md-6">
+                  <label class="form-label" for="resAdults">Adults</label>
+                  <select class="form-select" id="resAdults">
+                    <option>1</option>
+                    <option selected>2</option>
+                    <option>3</option>
+                    <option>4</option>
+                  </select>
+                </div>
+                <div class="col-md-6">
+                  <label class="form-label" for="resChildren">Children</label>
+                  <select class="form-select" id="resChildren">
+                    <option selected>0</option>
+                    <option>1</option>
+                    <option>2</option>
+                    <option>3</option>
+                  </select>
+                </div>
+              </div>
+              <div class="booking-panel__actions">
+                <button type="button" class="btn-chateau btn-chateau--filled booking-next" data-next="2">Continue to Room Selection</button>
+              </div>
+            </div>
+
+
 
 
 
