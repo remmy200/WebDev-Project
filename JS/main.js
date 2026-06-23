@@ -59,3 +59,29 @@ if (backToTop) {
   });
 }
 
+//3. SCROLL REVEAL ANIMATIONS
+const revealEls = document.querySelectorAll('.reveal');
+
+if (revealEls.length > 0) {
+  const revealObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+        revealObserver.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.12 });
+
+  revealEls.forEach(el => revealObserver.observe(el));
+}
+
+//4. ACTIVE NAV LINK - Highlight current page
+const currentPage = window.location.pathname.split('/').pop() || 'index.html';
+document.querySelectorAll('.navbar-links a').forEach(link => {
+  const href = link.getAttribute('href');
+  if (href === currentPage) {
+    link.classList.add('active');
+  }
+});
+
+
