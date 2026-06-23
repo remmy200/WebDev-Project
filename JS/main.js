@@ -249,6 +249,219 @@ if (countdownEl) {
   const countdownTimer = setInterval(updateCountdown, 1000);
 }
 
+//10. NEWSLETTER FORM - offers.html
+const newsletterForm = document.getElementById('newsletterForm');
+
+if (newsletterForm) {
+  newsletterForm.addEventListener('submit', (e) => {
+    e.preventDefault();
+    const input = newsletterForm.querySelector('input[type="email"]');
+    if (!input || !input.value) return;
+
+    // Replace form with success message
+    newsletterForm.innerHTML = `
+      <p class="font-serif text-muted">
+        <i class="fa-solid fa-check-circle text-gold"></i>
+        Thank you — you're on the list. We'll be in touch with our next offer.
+      </p>`;
+  });
+}
+
+//11. MULTI-STEP BOOKING FORM
+const bookingNextBtns = document.querySelectorAll('.booking-next');
+const bookingBackBtns = document.querySelectorAll('.booking-back');
+const bookingSteps    = document.querySelectorAll('.booking-step');
+const bookingPanels   = document.querySelectorAll('.booking-panel');
+
+function showPanel(stepNum) {
+  bookingPanels.forEach(panel => panel.classList.remove('active'));
+  bookingSteps.forEach(step  => step.classList.remove('active', 'completed'));
+
+  const target = document.getElementById(`panel-${stepNum}`);
+  if (target) target.classList.add('active');
+
+  bookingSteps.forEach(step => {
+    const num = parseInt(step.dataset.step);
+    if (num < stepNum)  step.classList.add('completed');
+    if (num === stepNum) step.classList.add('active');
+  });
+
+  // Scroll to form top smoothly
+  const formTop = document.getElementById('reservationForm');
+  if (formTop) formTop.scrollIntoView({ behavior: 'smooth', block: 'start' });
+}
+
+if (bookingNextBtns.length > 0) {
+  bookingNextBtns.forEach(btn => {
+    btn.addEventListener('click', () => {
+      const next = parseInt(btn.dataset.next);
+
+      // Basic validation before advancing
+      if (next === 2) {
+        const checkin  = document.getElementById('resCheckin')?.value;
+        const checkout = document.getElementById('resCheckout')?.value;
+        if (!checkin || !checkout) {
+          alert('Please select your check-in and check-out dates.');
+          return;
+        }
+        if (checkout <= checkin) {
+          alert('Check-out must be after check-in.');
+          return;
+        }
+        updateSidebar();
+      }
+
+      if (next === 3) {
+        const chosen = document.querySelector('input[name="roomChoice"]:checked');
+        if (!chosen) {
+          alert('Please select a room to continue.');
+          return;
+        }
+        updateSidebar();
+      }
+
+      if (next === 4) {
+        const firstName = document.getElementById('resFirstName')?.value;
+        const lastName  = document.getElementById('resLastName')?.value;
+        const email     = document.getElementById('resEmail')?.value;
+        const phone     = document.getElementById('resPhone')?.value;
+        if (!firstName || !lastName || !email || !phone) {
+          alert('Please fill in all required fields.');
+          return;
+        }
+        updateSidebar();
+        populateConfirmSummary();
+      }
+
+      showPanel(next);
+    });
+  });
+}
+
+if (bookingBackBtns.length > 0) {
+  bookingBackBtns.forEach(btn => {
+    btn.addEventListener('click', () => {
+      showPanel(parseInt(btn.dataset.back));
+    });
+  });
+}
+
+// Update the sidebar summary as the user fills in the form
+function updateSidebar() {
+  const checkin  = document.getElementById('resCheckin')?.value;
+  const checkout = document.getElementById('resCheckout')?.value;
+  const adults   = document.getElementById('resAdults')?.value   || '2';
+  const children = document.getElementById('resChildren')?.value || '0';
+  const chosen   = document.querySelector('input[name="roomChoice"]:checked');
+
+  // Dates
+  const sumCheckin  = document.getElementById('sumCheckin');
+  const sumCheckout = document.getElementById('sumCheckout');
+  if (sumCheckin  && checkin)  sumCheckin.textContent  = formatDate(checkin);
+  if (sumCheckout && checkout) sumCheckout.textContent = formatDate(checkout);
+
+  // Guests
+  const sumGuests = document.getElementById('sumGuests');
+  if (sumGuests) {
+    let guestStr = `${adults} adult${adults > 1 ? 's' : ''}`;
+    if (parseInt(children) > 0) guestStr += `, ${children} child${children > 1 ? 'ren' : ''}`;
+    sumGuests.textContent = guestStr;
+  }
+
+  // Room and total
+  const sumRoom  = document.getElementById('sumRoom');
+  const sumTotal = document.getElementById('sumTotal');
+
+  if (chosen && sumRoom) {
+    // Get the label text (room name) from the parent card
+    const label = chosen.closest('.room-select-card');
+    const name  = label?.querySelector('h4')?.textContent || chosen.value;
+    sumRoom.textContent = name;
+
+    if (sumTotal && checkin && checkout) {
+      const nights    = calcNights(checkin, checkout);
+      const price     = parseInt(chosen.dataset.price) || 0;
+      const total     = nights * price;
+      sumTotal.textContent = `€${total.toLocaleString()}`;
+    }
+  }
+}
+
+// Populate the confirmation panel summary (step 4)
+function populateConfirmSummary() {
+  const summaryBox = document.getElementById('bookingSummary');
+  if (!summaryBox) return;
+
+  const checkin    = document.getElementById('resCheckin')?.value;
+  const checkout   = document.getElementById('resCheckout')?.value;
+  const adults     = document.getElementById('resAdults')?.value || '2';
+  const children   = document.getElementById('resChildren')?.value || '0';
+  const firstName  = document.getElementById('resFirstName')?.value || '';
+  const lastName   = document.getElementById('resLastName')?.value  || '';
+  const email      = document.getElementById('resEmail')?.value     || '';
+  const phone      = document.getElementById('resPhone')?.value     || '';
+  const requests   = document.getElementById('resRequests')?.value  || 'None';
+  const chosen     = document.querySelector('input[name="roomChoice"]:checked');
+  const label      = chosen?.closest('.room-select-card');
+  const roomName   = label?.querySelector('h4')?.textContent || '—';
+  const nights     = checkin && checkout ? calcNights(checkin, checkout) : 0;
+  const price      = parseInt(chosen?.dataset.price) || 0;
+  const total      = nights * price;
+
+  summaryBox.innerHTML = `
+    <table class="table-chateau">
+      <tbody>
+        <tr><td>Name</td><td>${firstName} ${lastName}</td></tr>
+        <tr><td>Email</td><td>${email}</td></tr>
+        <tr><td>Phone</td><td>${phone}</td></tr>
+        <tr><td>Check-In</td><td>${formatDate(checkin)}</td></tr>
+        <tr><td>Check-Out</td><td>${formatDate(checkout)}</td></tr>
+        <tr><td>Nights</td><td>${nights}</td></tr>
+        <tr><td>Guests</td><td>${adults} adult(s), ${children} child(ren)</td></tr>
+        <tr><td>Room</td><td>${roomName}</td></tr>
+        <tr><td><strong>Estimated Total</strong></td><td><strong>€${total.toLocaleString()}</strong></td></tr>
+        <tr><td>Special Requests</td><td>${requests}</td></tr>
+      </tbody>
+    </table>`;
+}
+
+// Reservation form submit (step 4)
+const reservationForm = document.getElementById('reservationForm');
+if (reservationForm) {
+  reservationForm.addEventListener('submit', (e) => {
+    e.preventDefault();
+    const terms = document.getElementById('resTerms');
+    if (!terms?.checked) {
+      alert('Please agree to the cancellation policy to continue.');
+      return;
+    }
+    // Replace form with confirmation message
+    const container = reservationForm.closest('.col-lg-8');
+    if (container) {
+      container.innerHTML = `
+        <div class="booking-confirm">
+          <i class="fa-solid fa-circle-check booking-confirm__icon"></i>
+          <h3 class="font-display">Reservation Request Received</h3>
+          <p class="text-muted mt-3">Thank you for choosing Château de Remmy. Our reservations team will contact you within 24 hours to confirm your booking.</p>
+          <a href="index.html" class="btn-chateau btn-chateau--filled mt-4">Return Home</a>
+        </div>`;
+    }
+  });
+}
+
+// Pre-fill dates from URL params if arriving from quick-book
+(function prefillFromURL() {
+  const params   = new URLSearchParams(window.location.search);
+  const checkin  = params.get('checkin');
+  const checkout = params.get('checkout');
+  const ci = document.getElementById('resCheckin');
+  const co = document.getElementById('resCheckout');
+  if (ci && checkin)  ci.value = checkin;
+  if (co && checkout) co.value = checkout;
+  if (checkin || checkout) updateSidebar();
+})();
+
+
 
 
 
