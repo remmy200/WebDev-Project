@@ -41,3 +41,21 @@ if (drawer) {
     link.addEventListener('click', closeDrawer);
   });
 }
+
+//2.Back to top button responsivennes
+const backToTop = document.getElementById('back-to-top');
+
+if (backToTop) {
+  window.addEventListener('scroll', () => {
+    if (window.scrollY > 400) {
+      backToTop.classList.add('visible');
+    } else {
+      backToTop.classList.remove('visible');
+    }
+  }, { passive: true });
+
+  backToTop.addEventListener('click', () => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  });
+}
+
