@@ -461,6 +461,81 @@ if (reservationForm) {
   if (checkin || checkout) updateSidebar();
 })();
 
+// 12. CONTACT FORM - contact.html
+const contactForm = document.getElementById('contactForm');
+
+if (contactForm) {
+  const emailInput = document.getElementById('contactEmail');
+  const phoneInput = document.getElementById('contactPhone');
+  const emailError = document.getElementById('contactEmailError');
+  const phoneError = document.getElementById('contactPhoneError');
+
+  // Real-time email validation
+  if (emailInput) {
+    emailInput.addEventListener('blur', () => {
+      const valid = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(emailInput.value);
+      if (emailError) {
+        emailError.textContent = valid || !emailInput.value ? '' : 'Please enter a valid email address.';
+      }
+    });
+  }
+
+  // Real-time phone validation (accepts +254 Kenya and +33 France formats)
+  if (phoneInput) {
+    phoneInput.addEventListener('blur', () => {
+      const val   = phoneInput.value.trim();
+      const valid = !val || /^(\+?[\d\s\-()]{7,15})$/.test(val);
+      if (phoneError) {
+        phoneError.textContent = valid ? '' : 'Please enter a valid phone number.';
+      }
+    });
+  }
+
+  contactForm.addEventListener('submit', (e) => {
+    e.preventDefault();
+    const name    = document.getElementById('contactName')?.value.trim();
+    const email   = emailInput?.value.trim();
+    const subject = document.getElementById('contactSubject')?.value;
+    const message = document.getElementById('contactMessage')?.value.trim();
+
+    if (!name || !email || !subject || !message) {
+      alert('Please fill in all required fields.');
+      return;
+    }
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+      alert('Please enter a valid email address.');
+      return;
+    }
+
+    const success = document.getElementById('contactFormSuccess');
+    if (success) success.classList.remove('d-none');
+    contactForm.reset();
+  });
+}
+
+
+//13. EVENT INQUIRY FORM - events.html
+const eventForm = document.getElementById('eventInquiryForm');
+
+if (eventForm) {
+  eventForm.addEventListener('submit', (e) => {
+    e.preventDefault();
+    const name  = document.getElementById('eventName')?.value.trim();
+    const email = document.getElementById('eventEmail')?.value.trim();
+    const type  = document.getElementById('eventType')?.value;
+
+    if (!name || !email || !type) {
+      alert('Please fill in your name, email, and event type.');
+      return;
+    }
+
+    const success = document.getElementById('eventFormSuccess');
+    if (success) success.classList.remove('d-none');
+    eventForm.reset();
+  });
+}
+
+
 
 
 
