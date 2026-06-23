@@ -84,4 +84,49 @@ document.querySelectorAll('.navbar-links a').forEach(link => {
   }
 });
 
+//5. RESERVE.HTML DATE VALIDATIONS
+const quickBookForm = document.getElementById('quickBookForm');
+
+if (quickBookForm) {
+  // Set minimum date to today
+  const today = new Date().toISOString().split('T')[0];
+  const checkinInput  = document.getElementById('qbCheckin');
+  const checkoutInput = document.getElementById('qbCheckout');
+
+  if (checkinInput)  checkinInput.setAttribute('min', today);
+  if (checkoutInput) checkoutInput.setAttribute('min', today);
+
+  // When check-in changes, push check-out min forward
+  if (checkinInput) {
+    checkinInput.addEventListener('change', () => {
+      if (checkoutInput) {
+        checkoutInput.setAttribute('min', checkinInput.value);
+        if (checkoutInput.value && checkoutInput.value <= checkinInput.value) {
+          checkoutInput.value = '';
+        }
+      }
+    });
+  }
+
+  quickBookForm.addEventListener('submit', (e) => {
+    e.preventDefault();
+    const checkin  = checkinInput?.value;
+    const checkout = checkoutInput?.value;
+
+    if (!checkin || !checkout) {
+      alert('Please select both check-in and check-out dates.');
+      return;
+    }
+    if (checkout <= checkin) {
+      alert('Check-out must be after check-in.');
+      return;
+    }
+    // Redirect to reservations with dates in URL query
+    window.location.href = `reservations.html?checkin=${checkin}&checkout=${checkout}`;
+  });
+}
+
+
+
+
 
