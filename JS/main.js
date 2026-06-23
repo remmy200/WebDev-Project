@@ -126,6 +126,130 @@ if (quickBookForm) {
   });
 }
 
+//6. ROOM FILTER - ROOMS.HTML
+const roomFilterBtns = document.querySelectorAll('[data-filter]');
+const roomCards      = document.querySelectorAll('.room-card-wrap');
+const noRoomsMsg     = document.getElementById('noRoomsMsg');
+
+if (roomFilterBtns.length > 0) {
+  roomFilterBtns.forEach(btn => {
+    btn.addEventListener('click', () => {
+      roomFilterBtns.forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+
+      const filter = btn.dataset.filter;
+      let visible  = 0;
+
+      roomCards.forEach(card => {
+        const cats   = card.dataset.category || '';
+        const show   = filter === 'all' || cats.includes(filter);
+        card.style.display = show ? '' : 'none';
+        if (show) visible++;
+      });
+
+      if (noRoomsMsg) {
+        noRoomsMsg.classList.toggle('d-none', visible > 0);
+      }
+    });
+  });
+}
+
+
+//7. GALLERY FILTER - Gallery.html
+const galleryFilterBtns = document.querySelectorAll('[data-gfilter]');
+const galleryItems      = document.querySelectorAll('.gallery-item');
+const noPhotosMsg       = document.getElementById('noPhotosMsg');
+
+if (galleryFilterBtns.length > 0) {
+  galleryFilterBtns.forEach(btn => {
+    btn.addEventListener('click', () => {
+      galleryFilterBtns.forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+
+      const filter = btn.dataset.gfilter;
+      let visible  = 0;
+
+      galleryItems.forEach(item => {
+        const cat   = item.dataset.category;
+        const show  = filter === 'all' || cat === filter;
+        item.classList.toggle('is-hidden', !show);
+        if (show) visible++;
+      });
+
+      if (noPhotosMsg) {
+        noPhotosMsg.classList.toggle('d-none', visible > 0);
+      }
+    });
+  });
+}
+
+
+//8. GALLERY LIGHTBOX - gallery.html
+const lightboxModal   = document.getElementById('lightboxModal');
+const lightboxImage   = document.getElementById('lightboxImage');
+const lightboxCaption = document.getElementById('lightboxCaption');
+
+if (lightboxModal) {
+  lightboxModal.addEventListener('show.bs.modal', (e) => {
+    const trigger = e.relatedTarget; // the img that was clicked
+    if (!trigger) return;
+    const src     = trigger.dataset.img     || trigger.src;
+    const caption = trigger.dataset.caption || trigger.alt;
+    if (lightboxImage)   lightboxImage.src = src;
+    if (lightboxCaption) lightboxCaption.textContent = caption;
+  });
+
+  lightboxModal.addEventListener('hidden.bs.modal', () => {
+    if (lightboxImage)   lightboxImage.src = '';
+    if (lightboxCaption) lightboxCaption.textContent = '';
+  });
+}
+
+
+//9. COUNTDOWN TIMER - offers.html
+const countdownEl = document.getElementById('offerCountdown');
+
+if (countdownEl) {
+  const deadline = new Date(countdownEl.dataset.deadline).getTime();
+
+  const cdDays    = document.getElementById('cdDays');
+  const cdHours   = document.getElementById('cdHours');
+  const cdMinutes = document.getElementById('cdMinutes');
+  const cdSeconds = document.getElementById('cdSeconds');
+
+  function pad(n) {
+    return String(n).padStart(2, '0');
+  }
+
+  function updateCountdown() {
+    const now  = Date.now();
+    const diff = deadline - now;
+
+    if (diff <= 0) {
+      if (cdDays)    cdDays.textContent    = '00';
+      if (cdHours)   cdHours.textContent   = '00';
+      if (cdMinutes) cdMinutes.textContent = '00';
+      if (cdSeconds) cdSeconds.textContent = '00';
+      clearInterval(countdownTimer);
+      return;
+    }
+
+    const days    = Math.floor(diff / (1000 * 60 * 60 * 24));
+    const hours   = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+    const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+    const seconds = Math.floor((diff % (1000 * 60)) / 1000);
+
+    if (cdDays)    cdDays.textContent    = pad(days);
+    if (cdHours)   cdHours.textContent   = pad(hours);
+    if (cdMinutes) cdMinutes.textContent = pad(minutes);
+    if (cdSeconds) cdSeconds.textContent = pad(seconds);
+  }
+
+  updateCountdown();
+  const countdownTimer = setInterval(updateCountdown, 1000);
+}
+
+
 
 
 
