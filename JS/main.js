@@ -321,96 +321,20 @@ if (bookingNextBtns.length > 0) {
       }
 
       if (next === 4) {
-  const firstName = document.getElementById('resFirstName')?.value.trim();
-  const lastName  = document.getElementById('resLastName')?.value.trim();
-  const email     = document.getElementById('resEmail')?.value.trim();
-  const phone     = document.getElementById('resPhone')?.value.trim();
+        const firstName = document.getElementById('resFirstName')?.value;
+        const lastName  = document.getElementById('resLastName')?.value;
+        const email     = document.getElementById('resEmail')?.value;
+        const phone     = document.getElementById('resPhone')?.value;
+        if (!firstName || !lastName || !email || !phone) {
+          alert('Please fill in all required fields.');
+          return;
+        }
+        updateSidebar();
+        populateConfirmSummary();
+      }
 
-  // Empty check
-  if (!firstName || !lastName || !email || !phone) {
-    alert('Please fill in all required fields before continuing.');
-    return;
-  }
-
-  // Name validation — letters and spaces only, minimum 2 characters
-  const nameRegex = /^[a-zA-ZÀ-ÿ\s\-']{2,}$/;
-  if (!nameRegex.test(firstName)) {
-    alert('Please enter a valid first name.');
-    return;
-  }
-  if (!nameRegex.test(lastName)) {
-    alert('Please enter a valid last name.');
-    return;
-  }
-
-  // Email format validation
-  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
-  if (!emailRegex.test(email)) {
-    alert('Please enter a valid email address (e.g. name@example.com).');
-    return;
-  }
-
-  // Phone validation — accepts international formats including +254 and +33
-  const phoneRegex = /^(\+?[\d\s\-().]{7,20})$/;
-  if (!phoneRegex.test(phone)) {
-    alert('Please enter a valid phone number (e.g. +254 712 345 678).');
-    return;
-  }
-
-  updateSidebar();
-  populateConfirmSummary();
-}
-// ── Real-time validation feedback on reservations form fields ──
-const resEmail = document.getElementById('resEmail');
-const resPhone = document.getElementById('resPhone');
-
-if (resEmail) {
-  resEmail.addEventListener('blur', () => {
-    const val   = resEmail.value.trim();
-    const valid = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(val);
-    resEmail.style.borderColor = val && !valid ? '#c0392b' : '';
-    resEmail.style.boxShadow   = val && !valid ? '0 0 0 3px rgba(192,57,43,0.15)' : '';
-
-    let errEl = document.getElementById('resEmailError');
-    if (!errEl) {
-      errEl = document.createElement('span');
-      errEl.id = 'resEmailError';
-      errEl.style.cssText = 'font-size:0.75rem;color:#c0392b;display:block;margin-top:0.25rem;';
-      resEmail.parentNode.appendChild(errEl);
-    }
-    errEl.textContent = val && !valid ? 'Please enter a valid email address.' : '';
-  });
-
-  resEmail.addEventListener('input', () => {
-    resEmail.style.borderColor = '';
-    resEmail.style.boxShadow   = '';
-    const errEl = document.getElementById('resEmailError');
-    if (errEl) errEl.textContent = '';
-  });
-}
-
-if (resPhone) {
-  resPhone.addEventListener('blur', () => {
-    const val   = resPhone.value.trim();
-    const valid = !val || /^(\+?[\d\s\-().]{7,20})$/.test(val);
-    resPhone.style.borderColor = val && !valid ? '#c0392b' : '';
-    resPhone.style.boxShadow   = val && !valid ? '0 0 0 3px rgba(192,57,43,0.15)' : '';
-
-    let errEl = document.getElementById('resPhoneError');
-    if (!errEl) {
-      errEl = document.createElement('span');
-      errEl.id = 'resPhoneError';
-      errEl.style.cssText = 'font-size:0.75rem;color:#c0392b;display:block;margin-top:0.25rem;';
-      resPhone.parentNode.appendChild(errEl);
-    }
-    errEl.textContent = val && !valid ? 'Please enter a valid phone number.' : '';
-  });
-
-  resPhone.addEventListener('input', () => {
-    resPhone.style.borderColor = '';
-    resPhone.style.boxShadow   = '';
-    const errEl = document.getElementById('resPhoneError');
-    if (errEl) errEl.textContent = '';
+      showPanel(next);
+    });
   });
 }
 
