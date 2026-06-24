@@ -535,6 +535,56 @@ if (eventForm) {
   });
 }
 
+//14. FAQ AND FILTER - FAQ.html
+const faqSearchInput = document.getElementById('faqSearchInput');
+const faqFilterBtns  = document.querySelectorAll('[data-faqfilter]');
+const faqItems       = document.querySelectorAll('.faq-item');
+const noFaqMsg       = document.getElementById('noFaqMsg');
+
+let currentFaqFilter = 'all';
+
+function applyFaqFilters() {
+  const searchTerm = faqSearchInput?.value.toLowerCase().trim() || '';
+  let visible = 0;
+
+  faqItems.forEach(item => {
+    const questionEl = item.querySelector('.accordion-button');
+    const answerEl   = item.querySelector('.accordion-body');
+    const question   = questionEl?.textContent.toLowerCase() || '';
+    const answer     = answerEl?.textContent.toLowerCase()   || '';
+    const category   = item.dataset.category || '';
+
+    const matchesFilter = currentFaqFilter === 'all' || category === currentFaqFilter;
+    const matchesSearch = !searchTerm || question.includes(searchTerm) || answer.includes(searchTerm);
+
+    const show = matchesFilter && matchesSearch;
+    item.style.display = show ? '' : 'none';
+    if (show) visible++;
+  });
+
+  if (noFaqMsg) {
+    noFaqMsg.classList.toggle('d-none', visible > 0);
+  }
+}
+
+// Category filter
+if (faqFilterBtns.length > 0) {
+  faqFilterBtns.forEach(btn => {
+    btn.addEventListener('click', () => {
+      faqFilterBtns.forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      currentFaqFilter = btn.dataset.faqfilter;
+      applyFaqFilters();
+    });
+  });
+}
+
+// Search input
+if (faqSearchInput) {
+  faqSearchInput.addEventListener('input', applyFaqFilters);
+}
+
+
 
 
 
