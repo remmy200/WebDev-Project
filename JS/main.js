@@ -256,7 +256,11 @@ if (newsletterForm) {
   newsletterForm.addEventListener('submit', (e) => {
     e.preventDefault();
     const input = newsletterForm.querySelector('input[type="email"]');
-    if (!input || !input.value) return;
+    const email = input?.value.trim() || '';
+    if (!input || !email || !isValidEmail(email)) {
+      alert('Please enter a valid email address to subscribe.');
+      return;
+    }
 
     // Replace form with success message
     newsletterForm.innerHTML = `
@@ -272,6 +276,38 @@ const bookingNextBtns = document.querySelectorAll('.booking-next');
 const bookingBackBtns = document.querySelectorAll('.booking-back');
 const bookingSteps    = document.querySelectorAll('.booking-step');
 const bookingPanels   = document.querySelectorAll('.booking-panel');
+
+const resCheckin = document.getElementById('resCheckin');
+const resCheckout = document.getElementById('resCheckout');
+if (resCheckin && resCheckout) {
+  const today = new Date().toISOString().split('T')[0];
+  resCheckin.setAttribute('min', today);
+  resCheckout.setAttribute('min', today);
+
+  function validateReservationDate(input) {
+    const value = input.value;
+    if (!value) return;
+    if (isDateInThePast(value)) {
+      alert('Please select a check-in/check-out date that is today or later.');
+      input.value = '';
+      return;
+    }
+    if (input === resCheckin && resCheckout.value && resCheckout.value <= value) {
+      alert('Check-out must be after check-in.');
+      resCheckout.value = '';
+    }
+    if (input === resCheckout && resCheckin.value && value <= resCheckin.value) {
+      alert('Check-out must be after check-in.');
+      input.value = '';
+    }
+    if (input === resCheckin && value) {
+      resCheckout.setAttribute('min', value);
+    }
+  }
+
+  resCheckin.addEventListener('change', () => validateReservationDate(resCheckin));
+  resCheckout.addEventListener('change', () => validateReservationDate(resCheckout));
+}
 
 function showPanel(stepNum) {
   bookingPanels.forEach(panel => panel.classList.remove('active'));
@@ -304,6 +340,14 @@ if (bookingNextBtns.length > 0) {
           alert('Please select your check-in and check-out dates.');
           return;
         }
+        if (isDateInThePast(checkin)) {
+          alert('Check-in date cannot be in the past.');
+          return;
+        }
+        if (isDateInThePast(checkout)) {
+          alert('Check-out date cannot be in the past.');
+          return;
+        }
         if (checkout <= checkin) {
           alert('Check-out must be after check-in.');
           return;
@@ -321,12 +365,17 @@ if (bookingNextBtns.length > 0) {
       }
 
       if (next === 4) {
-        const firstName = document.getElementById('resFirstName')?.value;
-        const lastName  = document.getElementById('resLastName')?.value;
-        const email     = document.getElementById('resEmail')?.value;
-        const phone     = document.getElementById('resPhone')?.value;
-        if (!firstName || !lastName || !email || !phone) {
-          alert('Please fill in all required fields.');
+        const firstName = document.getElementById('resFirstName')?.value?.trim();
+        const lastName  = document.getElementById('resLastName')?.value?.trim();
+        const email     = document.getElementById('resEmail')?.value?.trim();
+        const phone     = document.getElementById('resPhone')?.value?.trim();
+        const validEmail = isValidEmail(email || '');
+        const validPhone = isValidPhone(phone || '');
+        const validFirst = isValidName(firstName || '');
+        const validLast  = isValidName(lastName || '');
+
+        if (!firstName || !lastName || !email || !phone || !validFirst || !validLast || !validEmail || !validPhone) {
+          alert('Please fill in all required fields with valid names, email, and phone number.');
           return;
         }
         updateSidebar();
@@ -431,8 +480,27 @@ if (reservationForm) {
   reservationForm.addEventListener('submit', (e) => {
     e.preventDefault();
     const terms = document.getElementById('resTerms');
+    const email = document.getElementById('resEmail')?.value.trim() || '';
+    const phone = document.getElementById('resPhone')?.value.trim() || '';
+    const firstName = document.getElementById('resFirstName')?.value.trim() || '';
+    const lastName = document.getElementById('resLastName')?.value.trim() || '';
+    const checkin = document.getElementById('resCheckin')?.value;
+    const checkout = document.getElementById('resCheckout')?.value;
+
     if (!terms?.checked) {
       alert('Please agree to the cancellation policy to continue.');
+      return;
+    }
+    if (!firstName || !lastName || !isValidName(firstName) || !isValidName(lastName)) {
+      alert('Please enter valid first and last names without numbers.');
+      return;
+    }
+    if (!checkin || !checkout || isDateInThePast(checkin) || isDateInThePast(checkout) || checkout <= checkin) {
+      alert('Please select valid future dates for your reservation, with check-out after check-in.');
+      return;
+    }
+    if (!isValidEmail(email) || !isValidPhone(phone)) {
+      alert('Please enter a valid email address and phone number before submitting.');
       return;
     }
     // Replace form with confirmation message
@@ -461,6 +529,53 @@ if (reservationForm) {
   if (checkin || checkout) updateSidebar();
 })();
 
+// Validation helpers
+function isValidEmail(value) {
+  return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value);
+}
+
+function isValidPhone(value) {
+  return /^[\d\+\s\-()]{7,20}$/.test(value);
+}
+
+function isValidName(value) {
+  return /^[A-Za-zÀ-ÖØ-öø-ÿ' -]+$/.test(value);
+}
+
+function isDateInThePast(value) {
+  if (!value) return false;
+  const date = new Date(value + 'T00:00:00');
+  const today = new Date();
+  today.setHours(0, 0, 0, 0);
+  return date < today;
+}
+
+function setFieldError(input, message) {
+  if (!input) return;
+  const errorEl = input.parentElement?.querySelector('.form-error');
+  if (errorEl) errorEl.textContent = message;
+  input.classList.toggle('invalid', !!message);
+}
+
+function clearFieldError(input) {
+  setFieldError(input, '');
+}
+
+function validateFieldValue(input, requiredMessage, invalidMessage, validator) {
+  if (!input) return false;
+  const value = input.value.trim();
+  if (!value) {
+    setFieldError(input, requiredMessage);
+    return false;
+  }
+  if (!validator(value)) {
+    setFieldError(input, invalidMessage);
+    return false;
+  }
+  clearFieldError(input);
+  return true;
+}
+
 // 12. CONTACT FORM - contact.html
 const contactForm = document.getElementById('contactForm');
 
@@ -473,21 +588,13 @@ if (contactForm) {
   // Real-time email validation
   if (emailInput) {
     emailInput.addEventListener('blur', () => {
-      const valid = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(emailInput.value);
-      if (emailError) {
-        emailError.textContent = valid || !emailInput.value ? '' : 'Please enter a valid email address.';
-      }
+      validateFieldValue(emailInput, 'Email is required.', 'Please enter a valid email address.', isValidEmail);
     });
   }
 
-  // Real-time phone validation (accepts +254 Kenya and +33 France formats)
   if (phoneInput) {
     phoneInput.addEventListener('blur', () => {
-      const val   = phoneInput.value.trim();
-      const valid = !val || /^(\+?[\d\s\-()]{7,15})$/.test(val);
-      if (phoneError) {
-        phoneError.textContent = valid ? '' : 'Please enter a valid phone number.';
-      }
+      validateFieldValue(phoneInput, 'Phone is required.', 'Please enter a valid phone number.', isValidPhone);
     });
   }
 
@@ -498,12 +605,11 @@ if (contactForm) {
     const subject = document.getElementById('contactSubject')?.value;
     const message = document.getElementById('contactMessage')?.value.trim();
 
-    if (!name || !email || !subject || !message) {
-      alert('Please fill in all required fields.');
-      return;
-    }
-    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
-      alert('Please enter a valid email address.');
+    const validEmail = validateFieldValue(emailInput, 'Email is required.', 'Please enter a valid email address.', isValidEmail);
+    const validPhone = validateFieldValue(phoneInput, 'Phone is required.', 'Please enter a valid phone number.', isValidPhone);
+
+    if (!name || !email || !subject || !message || !validEmail || !validPhone) {
+      alert('Please complete all required fields with valid information.');
       return;
     }
 
@@ -526,6 +632,10 @@ if (eventForm) {
 
     if (!name || !email || !type) {
       alert('Please fill in your name, email, and event type.');
+      return;
+    }
+    if (!isValidEmail(email)) {
+      alert('Please enter a valid email address.');
       return;
     }
 

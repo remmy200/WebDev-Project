@@ -638,6 +638,19 @@ ul {
   opacity: 0.6;
 }
 
+.form-chateau .form-error {
+  display: block;
+  margin-top: 0.35rem;
+  font-size: 0.8rem;
+  color: #c0392b;
+  min-height: 1.25rem;
+}
+
+.form-chateau .form-control.invalid,
+.form-chateau .form-select.invalid {
+  border-color: #c0392b;
+}
+
 /* ── Badge ────────────────────────────────────────────────── */
 .badge-chateau {
   display: inline-block;
